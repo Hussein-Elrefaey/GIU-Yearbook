@@ -9,7 +9,7 @@
    3. Filtering + sorting with signals and `computed`
    ===================================================================== */
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-
+import { StudentCard } from '../../components/student-card/student-card';
 import { Student } from '../../models/student.model';
 import { StudentService } from '../../services/student.service';
 
@@ -18,6 +18,7 @@ type SortMode = 'featured' | 'name';
 
 @Component({
   selector: 'app-student-page',
+  imports: [StudentCard],
   templateUrl: './students-page.html',
   styleUrl: './students-page.css',
 })
@@ -63,7 +64,7 @@ export class StudentsPage implements OnInit {
       : filtered.sort((a, b) => Number(b.featured) - Number(a.featured) || a.id - b.id);
   });
 
-  // "08" style counter used by the tab label in the design.
+  // "08" style counter used by the tab label  in the design.
   protected readonly totalLabel = computed(() => String(this.students().length).padStart(2, '0'));
 
   // ngOnInit runs ONCE, right after Angular creates the component.
